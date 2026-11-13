@@ -4,9 +4,9 @@ import java.util.Scanner;
 public class VaultSystem {
     // Encapsulated attributes (Private to protect data integrity)
     private String ownerName;
-    private double balance;
+    protected double balance;
     private int pin;
-    private ArrayList<String> transactionHistory; // New Audit Log
+    protected ArrayList<String> transactionHistory; // New Audit Log
 
 
     // Constructor to initialize the vault
@@ -73,7 +73,7 @@ public class VaultSystem {
         System.out.print("Set a 4-digit Vault PIN: ");
         int userPin = scanner.nextInt();
 
-        VaultSystem myVault = new VaultSystem(name, initial, userPin);
+        EliteVault myVault = new EliteVault(name, initial, userPin, 0.05); // 5% interest rate
 
         // 2. SECURITY GATE (3 ATTEMPTS)
         boolean isAuthenticated = false;
@@ -106,9 +106,9 @@ public class VaultSystem {
             System.out.println("2. Withdraw Gold");
             System.out.println("3. View Vault Dossier");
             System.out.println("4. Print Audit Ledger");
-            System.out.println("5. Lock and Exit Vault");
-
-            System.out.print("Select an operation (1-5): ");
+            System.out.println("5. Apply Elite Interest , calling myVault.applyInterest()");
+            System.out.println("6. Lock and Exit Vault");
+            System.out.print("Select an operation (1-6): ");
 
             int choice = scanner.nextInt();
 
@@ -133,12 +133,15 @@ public class VaultSystem {
                     myVault.printLedger();
                     break;
                 case 5:
+                    myVault.applyInterest();
+                    break;
+                case 6:
                     System.out.println("Vault locked. Goodbye, " + name + ".");    
                     isRunning = false;
                     break;
 
                 default:
-                    System.out.println("Invalid command. Choose between 1 and 5.");
+                    System.out.println("Invalid command. Choose between 1 and 6.");
                     break;
             }
         }
