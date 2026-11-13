@@ -73,3 +73,14 @@ This repository serves as Phase 1 of an enterprise backend engineering track. Pl
 ## Author
 
 Built with precision and ambition. Open to backend Java engineering collaborations and freelance contracts.
+
+## System Architecture
+
+```mermaid
+graph LR
+    Client[Client / Postman] -->|HTTPS JSON + JWT| Controller[Spring Boot REST Controller]
+    Controller --> Service[Business Logic & Security Layer]
+    Service --> Repository[Spring Data JPA]
+    Repository --> DB[(PostgreSQL Database)]
+```
+
