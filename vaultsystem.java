@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class VaultSystem {
+ public class VaultSystem implements AuditableVault {
     // Encapsulated attributes (Private to protect data integrity)
     private String ownerName;
     protected double balance;
@@ -19,6 +19,7 @@ public class VaultSystem {
     }
 
     // Method to add funds
+    @Override 
     public void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
@@ -30,6 +31,7 @@ public class VaultSystem {
     }
 
     // Method to withdraw funds
+    @Override
     public void withdraw(double amount) {
         if (amount > 0 && amount <= balance) {
             balance -= amount;
@@ -41,17 +43,20 @@ public class VaultSystem {
     }
 
     // Method to verify PIN (Clean single responsibility)
+    @Override
     public boolean authenticate(int enteredPin) {
         return this.pin == enteredPin;
     }
 
     // Display dossier status
+    @Override
     public void displayStatus() {
         System.out.println("\n--- SLYTHERIN VAULT DOSSIER ---");
         System.out.println("Owner: " + ownerName);
         System.out.println("Current Reserves: $" + balance);
         System.out.println("-------------------------------\n");
     }
+    @Override 
     public void printLedger() {
         System.out.println("\n=== SLYTHERIN AUDIT LEDGER ===");
         for (String entry : transactionHistory) {
