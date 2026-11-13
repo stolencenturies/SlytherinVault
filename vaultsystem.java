@@ -132,6 +132,10 @@ public class VaultSystem {
                 case 4:
                     myVault.printLedger();
                     break;
+                case 5:
+                    System.out.println("Vault locked. Goodbye, " + name + ".");    
+                    isRunning = false;
+                    break;
 
                 default:
                     System.out.println("Invalid command. Choose between 1 and 5.");

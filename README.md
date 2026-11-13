@@ -62,9 +62,9 @@ SlytherinVault/
 
 This repository serves as Phase 1 of an enterprise backend engineering track. Planned architectural upgrades include:
 
-- [ ] **Interactive Loop & Menu System:** Continuous CLI session handling without program termination.
-- [ ] **Security Layer:** PIN-based authentication and lockout thresholds for failed withdrawal attempts.
-- [ ] **Transaction Ledger:** Audit log tracking timestamps and transaction types using `java.util.ArrayList`.
+- [x] **Interactive Loop & Menu System:** Continuous CLI session handling without program termination.
+- [x] **Security Layer:** PIN-based authentication and lockout thresholds for failed withdrawal attempts.
+- [x] **Transaction Ledger:** Audit log tracking timestamps and transaction types using `java.util.ArrayList`.
 - [ ] **Data Persistence:** File I/O serialization to save and restore vault states across sessions.
 - [ ] **Database & API Migration:** Refactoring core logic into a Spring Boot REST API backed by PostgreSQL.
 
