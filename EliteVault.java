@@ -14,4 +14,19 @@ public class EliteVault extends VaultSystem {
         transactionHistory.add("INTEREST | +$" + interestEarned + " | Balance: $" + balance);
         System.out.println("Elite Yield Applied (" + (interestRate * 100) + "%): +$" + interestEarned);
     }
+        @Override
+    public void withdraw(double amount) {
+        double minimumReserve = 500.00;
+
+        if (amount <= 0) {
+            System.out.println("Invalid withdrawal amount.");
+        } else if ((balance - amount) < minimumReserve) {
+            System.out.println("ELITE RULE VIOLATION: Must maintain at least $" + minimumReserve + " in reserves.");
+        } else {
+            balance -= amount;
+            transactionHistory.add("ELITE WITHDRAW | -$" + amount + " | Balance: $" + balance);
+            System.out.println("Elite Withdrawn: $" + amount + " | Remaining Balance: $" + balance);
+        }
+    }
+
 }
