@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class VaultSystem {
@@ -5,18 +6,23 @@ public class VaultSystem {
     private String ownerName;
     private double balance;
     private int pin;
+    private ArrayList<String> transactionHistory; // New Audit Log
+
 
     // Constructor to initialize the vault
     public VaultSystem(String ownerName, double initialDeposit, int pin) {
         this.ownerName = ownerName;
         this.balance = initialDeposit;
         this.pin = pin;
+        this.transactionHistory = new ArrayList<>();
+        this.transactionHistory.add("OPENED VAULT | Initial Balance: $" + initialDeposit);
     }
 
     // Method to add funds
     public void deposit(double amount) {
         if (amount > 0) {
             balance += amount;
+            transactionHistory.add("DEPOSIT  | +$" + amount + " | Balance: $" + balance);
             System.out.println("Deposited: $" + amount + " | New Balance: $" + balance);
         } else {
             System.out.println("Invalid deposit amount.");
@@ -27,6 +33,7 @@ public class VaultSystem {
     public void withdraw(double amount) {
         if (amount > 0 && amount <= balance) {
             balance -= amount;
+            transactionHistory.add("WITHDRAW | -$" + amount + " | Balance: $" + balance);
             System.out.println("Withdrawn: $" + amount + " | Remaining Balance: $" + balance);
         } else {
             System.out.println("Transaction denied: Insufficient funds or invalid amount.");
@@ -44,6 +51,13 @@ public class VaultSystem {
         System.out.println("Owner: " + ownerName);
         System.out.println("Current Reserves: $" + balance);
         System.out.println("-------------------------------\n");
+    }
+    public void printLedger() {
+        System.out.println("\n=== SLYTHERIN AUDIT LEDGER ===");
+        for (String entry : transactionHistory) {
+            System.out.println(entry);
+        }
+        System.out.println("==============================\n");
     }
 
     public static void main(String[] args) {
@@ -91,8 +105,10 @@ public class VaultSystem {
             System.out.println("1. Deposit Gold");
             System.out.println("2. Withdraw Gold");
             System.out.println("3. View Vault Dossier");
-            System.out.println("4. Lock & Exit Vault");
-            System.out.print("Select an operation (1-4): ");
+            System.out.println("4. Print Audit Ledger");
+            System.out.println("5. Lock and Exit Vault");
+
+            System.out.print("Select an operation (1-5): ");
 
             int choice = scanner.nextInt();
 
@@ -114,12 +130,11 @@ public class VaultSystem {
                     break;
 
                 case 4:
-                    System.out.println("Vault sealed. Farewell, " + name + ".");
-                    isRunning = false;
+                    myVault.printLedger();
                     break;
 
                 default:
-                    System.out.println("Invalid command. Choose between 1 and 4.");
+                    System.out.println("Invalid command. Choose between 1 and 5.");
                     break;
             }
         }
