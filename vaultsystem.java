@@ -4,11 +4,13 @@ class VaultSystem {
     // Encapsulated attributes (Private to protect data integrity)
     private String ownerName;
     private double balance;
+    private int pin; // Added PIN for security
 
     // Constructor to initialize the vault
-    public VaultSystem(String ownerName, double initialDeposit) {
+    public VaultSystem(String ownerName, double initialDeposit, int pin) {
         this.ownerName = ownerName;
         this.balance = initialDeposit;
+        this.pin = pin;
     }
 
     // Method to add funds
@@ -31,6 +33,17 @@ class VaultSystem {
         }
     }
 
+    // Method to verify PIN
+    public boolean authenticate(int enteredPin) {
+        if (this.pin == enteredPin) {
+            System.out.println("Authentication successful.");
+            return true;
+        } else {
+            System.out.println("Authentication failed: Incorrect PIN.");
+            return false;
+        }
+    }
+
     // Display dossier status
     public void displayStatus() {
         System.out.println("\n--- SLYTHERIN VAULT DOSSIER ---");
@@ -45,11 +58,15 @@ class VaultSystem {
         System.out.print("Enter Vault Owner Name: ");
         String name = scanner.nextLine();
 
+        
         System.out.print("Enter Initial Gold Deposit: ");
         double initial = scanner.nextDouble();
+        
+        System.out.print("Enter PIN: ");
+        int userPin = scanner.nextInt();
 
         // Instantiate your first Java Object
-        VaultSystem myVault = new VaultSystem(name, initial);
+        VaultSystem myVault = new VaultSystem(name, initial, userPin);
         myVault.displayStatus();
 
         // Execute test transactions
